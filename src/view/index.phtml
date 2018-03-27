@@ -30,22 +30,7 @@
     <div>
         <h1>Cache Warmer</h1>
         <?php if ($this->user): ?>
-            <div class="padded">
-                <table class="table table-striped">
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Hostname</th>
-                    </tr>
-                    <?php foreach ($this->getWebsites() as $website): /** @var \Snowdog\DevTest\Model\Website $website */ ?>
-                        <tr>
-                            <td><?= $website->getWebsiteId() ?></td>
-                            <td><a href="/website/<?= $website->getWebsiteId() ?>"><?= $website->getName() ?></a></td>
-                            <td><?= $website->getHostname() ?></td>
-                        </tr>
-                    <?php endforeach ?>
-                </table>
-            </div>
+            <p class="bg-success">Hello <?= $this->user->getDisplayName() ?>!</p>
 
             <div class="padded">
                 <form class="form-inline" method="post" action="/website">
@@ -63,7 +48,69 @@
                 </form>
             </div>
 
-            <p class="bg-success">Hello <?= $this->user->getDisplayName() ?>!</p>
+
+            <div class="padded">
+                <table class="table table-striped">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Hostname</th>
+                    </tr>
+                    <?php foreach ($this->getWebsites() as $website): /** @var \Snowdog\DevTest\Model\Website $website */ ?>
+                        <tr>
+                            <td><?= $website->getWebsiteId() ?></td>
+                            <td><a href="/website/<?= $website->getWebsiteId() ?>"><?= $website->getName() ?></a></td>
+                            <td><?= $website->getHostname() ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                </table>
+            </div>
+
+            <?php if ($this->userStats): ?>
+                <h3>Statistics</h3>
+                <div class="padded">
+                    <table class="table table-striped">
+                        <tr>
+                            <th width="350">Statistic</th>
+                            <th>Count</th>
+                        </tr>
+                        <tr>
+                            <td>Total number of websites associated with you:</td>
+                            <td><strong><?= $this->userStats->getWebsitesCount(); ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td>Total number of pages associated with you:</td>
+                            <td><strong><?= $this->userStats->getPagesCount(); ?></strong></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($this->recentlyVisitedPages): ?>
+                <h3>Recently visited pages</h3>
+
+                <div class="padded">
+                    <p>Most recently visited page is
+                        <strong><?= $this->mostRecentlyVisitedPage->getPageUrl(); ?></strong></p>
+                    <p>Least recently visited page is
+                        <strong><?= $this->leastRecentlyVisitedPage->getPageUrl(); ?></strong></p>
+                </div>
+                <div class="padded">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Page Url</th>
+                            <th>Last Visit</th>
+                        </tr>
+                        <?php foreach ($this->recentlyVisitedPages as $recentlyVisitedPage): ?>
+                            <tr>
+                                <td><?= $recentlyVisitedPage->getPageUrl(); ?></td>
+                                <td><?= $recentlyVisitedPage->getLastVisit(); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+
+            <?php endif; ?>
         <?php endif ?>
     </div>
 

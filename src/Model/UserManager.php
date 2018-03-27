@@ -53,4 +53,24 @@ class UserManager
     {
         return hash('sha512', $password . $salt);
     }
+
+    /**
+     * Get stats for user
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function getStatsForUser(User $user)
+    {
+        $userId = $user->getUserId();
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare('SELECT * FROM user_stats WHERE user_id = :user_id');
+        $query->setFetchMode(\PDO::FETCH_CLASS, UserStats::class);
+        $query->bindParam(':user_id', $userId, \PDO::PARAM_INT);
+        $query->execute();
+
+        /** @var UserStats $userStats */
+        $userStats = $query->fetch(\PDO::FETCH_CLASS);
+        return $userStats;
+    }
 }

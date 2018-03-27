@@ -68,4 +68,34 @@ class PageManager
     {
         return $this->errorInfo;
     }
+
+    /**
+     * Get recently visited page for user
+     *
+     * @param User $user
+     */
+    public function getRecentlyVisitedForUser(User $user)
+    {
+
+        $userId = $user->getUserId();
+        /** @var \PDOStatement $query */
+
+        $statement = <<<SQL
+SELECT
+  p.page_id,
+  CONCAT_WS('/', w.hostname, p.url) AS page_url,
+  p.last_visit
+FROM websites AS w
+  INNER JOIN pages p ON w.website_id = p.website_id
+WHERE w.user_id = :user_id
+ORDER BY p.last_visit DESC   
+SQL;
+
+        $query = $this->database->prepare($statement);
+        $query->bindParam(':user_id', $userId, \PDO::PARAM_INT);
+        $query->execute();
+        $recentlyVisited = $query->fetchAll(\PDO::FETCH_CLASS, PageRecentlyVisited::class);
+
+        return $recentlyVisited;
+    }
 }

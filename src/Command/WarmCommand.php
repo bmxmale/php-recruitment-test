@@ -40,6 +40,7 @@ class WarmCommand
             $warmer->setActor($actor);
 
             foreach ($pages as $page) {
+                $this->pageManager->updateLastVisit($page, time());
                 $warmer->warm($page->getUrl());
             }
         } else {

@@ -4,6 +4,10 @@ namespace Snowdog\DevTest\Migration;
 
 use Snowdog\DevTest\Core\Database;
 
+/**
+ * Class Version4
+ * @package Snowdog\DevTest\Migration
+ */
 class Version4
 {
     /**

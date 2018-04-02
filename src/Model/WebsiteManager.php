@@ -4,6 +4,10 @@ namespace Snowdog\DevTest\Model;
 
 use Snowdog\DevTest\Core\Database;
 
+/**
+ * Class WebsiteManager
+ * @package Snowdog\DevTest\Model
+ */
 class WebsiteManager
 {
     /**
@@ -11,22 +15,46 @@ class WebsiteManager
      */
     private $database;
 
+    /**
+     * WebsiteManager constructor.
+     * @param Database $database
+     */
     public function __construct(Database $database)
     {
         $this->database = $database;
     }
-    
-    public function getById($websiteId) {
+
+    /**
+     * @param $websiteId
+     * @param User|NULL $user
+     * @return Website
+     */
+    public function getById($websiteId, User $user = NULL) {
+        $select = 'SELECT * FROM websites WHERE website_id = :id';
+
+        if (!is_null($user)) {
+            $select = $select . ' AND user_id = :user_id';
+        }
+
         /** @var \PDOStatement $query */
-        $query = $this->database->prepare('SELECT * FROM websites WHERE website_id = :id');
+        $query = $this->database->prepare($select);
         $query->setFetchMode(\PDO::FETCH_CLASS, Website::class);
         $query->bindParam(':id', $websiteId, \PDO::PARAM_STR);
+
+        if (!is_null($user)) {
+            $query->bindParam(':user_id', $user->getUserId(), \PDO::PARAM_INT);
+        }
+
         $query->execute();
         /** @var Website $website */
         $website = $query->fetch(\PDO::FETCH_CLASS);
         return $website;
     }
 
+    /**
+     * @param User $user
+     * @return array
+     */
     public function getAllByUser(User $user)
     {
         $userId = $user->getUserId();
@@ -37,6 +65,12 @@ class WebsiteManager
         return $query->fetchAll(\PDO::FETCH_CLASS, Website::class);
     }
 
+    /**
+     * @param User $user
+     * @param $name
+     * @param $hostname
+     * @return string
+     */
     public function create(User $user, $name, $hostname)
     {
         $userId = $user->getUserId();

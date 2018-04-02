@@ -30,6 +30,10 @@
     <div>
 
         <div class="padded">
+            <h1>Add new Varnish</h1>
+        </div>
+
+        <div class="padded">
             <form class="form-inline" method="post" action="/varnish">
                 <div class="form-group">
                     <label for="exampleInputName2">IP</label>
@@ -45,7 +49,7 @@
         </div>
 
         <?php foreach ($this->getVarnishes() as $varnish): /** @var \Snowdog\DevTest\Model\Varnish $varnish */ ?>
-            <?php $websiteIds = $this->getAssignedWebsiteIds($varnish) ?>
+            <?php $websiteIds = $this->getAssignedWebsiteIds($varnish); ?>
             <h2><?= $varnish->getIP() ?></h2>
 
             <div class="padded">
@@ -57,7 +61,10 @@
                     </tr>
                     <?php foreach ($this->getWebsites() as $website): /** @var \Snowdog\DevTest\Model\Website $website */ ?>
                         <tr>
-                            <td><input type="checkbox" <?= in_array($website->getWebsiteId(), $websiteIds) ? 'checked="checked"' : '' ?>/></td>
+                            <td><input class="varnish-website" name="<?= $varnish->getVarnishId(); ?>"
+                                       value="<?= $website->getWebsiteId(); ?>"
+                                       type="checkbox" <?= in_array($website->getWebsiteId(), $websiteIds) ? 'checked="checked"' : '' ?>/>
+                            </td>
                             <td><?= $website->getName() ?></td>
                             <td><?= $website->getHostname() ?></td>
                         </tr>
@@ -70,6 +77,37 @@
 
 </div><!-- /.container -->
 
+
+<script type="application/javascript">
+    (function () {
+        var varnishCheckboxes = document.getElementsByClassName('varnish-website');
+        for (var i = 0, length = varnishCheckboxes.length; i < length; i++) {
+            varnishCheckboxes[i].addEventListener('change', changeVarnishWebsiteStatus, false);
+        }
+
+        function changeVarnishWebsiteStatus() {
+            var params = {
+                status: this.checked,
+                varnishId: this.name,
+                websiteId: this.value
+            };
+
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var resp = JSON.parse(http.responseText);
+                    if (!resp.status) {
+                        alert('Error during varnish-website changes.');
+                    }
+                }
+            }
+
+            http.open('POST', '/varnishWebsite', true);
+            http.setRequestHeader('Content-Type', 'application/json');
+            http.send(JSON.stringify(params));
+        }
+    })();
+</script>
 
 </body>
 </html>

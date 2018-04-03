@@ -29,7 +29,7 @@ class WebsiteManager
      * @param User|NULL $user
      * @return Website
      */
-    public function getById($websiteId, User $user = NULL) {
+    public function getById($websiteId, User $user = null) {
         $select = 'SELECT * FROM websites WHERE website_id = :id';
 
         if (!is_null($user)) {

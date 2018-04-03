@@ -46,17 +46,27 @@ class VarnishManager
      * @param User $user
      * @return array
      */
-    public function getById($varnishId, User $user)
+    public function getById($varnishId, User $user = null)
     {
-        $userId = $user->getUserId();
+        $select = 'SELECT * FROM varnishes WHERE varnish_id = :varnish';
+
+        if (!is_null($user)) {
+            $select = $select . ' AND user_id = :user';
+        }
 
         /** @var \PDOStatement $query */
-        $query = $this->database->prepare('SELECT * FROM varnishes WHERE user_id = :user AND varnish_id = :varnish');
+        $query = $this->database->prepare($select);
         $query->setFetchMode(\PDO::FETCH_CLASS, Varnish::class);
-        $query->bindParam(':user', $userId, \PDO::PARAM_INT);
         $query->bindParam(':varnish', $varnishId, \PDO::PARAM_INT);
+
+        if (!is_null($user)) {
+            $query->bindParam(':user', $user->getUserId(), \PDO::PARAM_INT);
+        }
+
         $query->execute();
-        return $query->fetch(\PDO::FETCH_CLASS);
+        /** @var Varnish $varnish */
+        $varnish = $query->fetch(\PDO::FETCH_CLASS);
+        return $varnish;
     }
 
     /**

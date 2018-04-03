@@ -2,6 +2,7 @@
 
 use Snowdog\DevTest\Command\MigrateCommand;
 use Snowdog\DevTest\Command\WarmCommand;
+use Snowdog\DevTest\Command\WarmVarnishCommand;
 use Snowdog\DevTest\Component\CommandRepository;
 use Snowdog\DevTest\Component\Menu;
 use Snowdog\DevTest\Component\Migrations;
@@ -39,6 +40,7 @@ RouteRepository::registerRoute('POST', '/varnishWebsite', CreateVarnishLinkActio
 
 CommandRepository::registerCommand('migrate_db', MigrateCommand::class);
 CommandRepository::registerCommand('warm [id]', WarmCommand::class);
+CommandRepository::registerCommand('warm_varnish [id]', WarmVarnishCommand::class);
 
 Menu::register(WebsitesMenu::class, 10);
 Menu::register(VarnishesMenu::class, 20);

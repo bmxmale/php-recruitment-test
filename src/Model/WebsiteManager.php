@@ -29,7 +29,8 @@ class WebsiteManager
      * @param User|NULL $user
      * @return Website
      */
-    public function getById($websiteId, User $user = null) {
+    public function getById($websiteId, User $user = null)
+    {
         $select = 'SELECT * FROM websites WHERE website_id = :id';
 
         if (!is_null($user)) {
@@ -45,6 +46,24 @@ class WebsiteManager
             $query->bindParam(':user_id', $user->getUserId(), \PDO::PARAM_INT);
         }
 
+        $query->execute();
+        /** @var Website $website */
+        $website = $query->fetch(\PDO::FETCH_CLASS);
+        return $website;
+    }
+
+    /**
+     * Get website by hostname
+     *
+     * @param $hostname
+     * @return Website
+     */
+    public function getByHostname($hostname)
+    {
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare('SELECT * FROM websites WHERE hostname = :hostname');
+        $query->setFetchMode(\PDO::FETCH_CLASS, Website::class);
+        $query->bindParam(':hostname', $hostname, \PDO::PARAM_STR);
         $query->execute();
         /** @var Website $website */
         $website = $query->fetch(\PDO::FETCH_CLASS);

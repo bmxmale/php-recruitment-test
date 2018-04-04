@@ -24,6 +24,8 @@ use Snowdog\DevTest\Menu\RegisterMenu;
 use Snowdog\DevTest\Menu\VarnishesMenu;
 use Snowdog\DevTest\Menu\WebsitesMenu;
 
+
+
 RouteRepository::registerRoute('GET', '/', IndexAction::class, 'execute');
 RouteRepository::registerRoute('GET', '/login', LoginFormAction::class, 'execute');
 RouteRepository::registerRoute('POST', '/login', LoginAction::class, 'execute');
@@ -42,9 +44,25 @@ CommandRepository::registerCommand('migrate_db', MigrateCommand::class);
 CommandRepository::registerCommand('warm [id]', WarmCommand::class);
 CommandRepository::registerCommand('warm_varnish [id]', WarmVarnishCommand::class);
 
+//php console.php  import:sitemap test https://www.sitemaps.org/sitemap.xml
+
 Menu::register(WebsitesMenu::class, 10);
 Menu::register(VarnishesMenu::class, 20);
 Menu::register(LoginMenu::class, 200);
 Menu::register(RegisterMenu::class, 250);
 
 Migrations::registerComponentMigration('Snowdog\\DevTest', 5);
+
+// TODO: Move to new package
+
+use Snowdog\DevTest\Command\SitemapCommand;
+use Snowdog\DevTest\Controller\SitemapAction;
+use Snowdog\DevTest\Controller\ImportSitemapAction;
+use Snowdog\DevTest\Menu\SitemapMenu;
+
+Menu::register(SitemapMenu::class, 20);
+
+RouteRepository::registerRoute('GET', '/sitemap', SitemapAction::class, 'execute');
+RouteRepository::registerRoute('POST', '/sitemap', ImportSitemapAction::class, 'execute');
+
+CommandRepository::registerCommand('import:sitemap [userLogin] [sitemapUrl]', SitemapCommand::class);

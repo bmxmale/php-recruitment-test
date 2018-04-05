@@ -2,15 +2,27 @@
 
 namespace Snowdog\DevTest\Component;
 
-use DI\InvokerInterface;
+use DI\Container;
 
+/**
+ * Class Menu
+ * @package Snowdog\DevTest\Component
+ */
 class Menu
 {
     const CLASS_NAME = 'classname';
     const SORT_ORDER = 'sortorder';
+
+    /**
+     * @var
+     */
     private static $instance;
+
+    /**
+     * @var array
+     */
     private $items = [];
-    /** @var InvokerInterface */
+    /** @var Container */
     private $container;
 
     /** @return Menu */
@@ -21,14 +33,21 @@ class Menu
         }
         return self::$instance;
     }
-    
+
+    /**
+     * @param $className
+     * @param $sortOrder
+     */
     public static function register($className, $sortOrder)
     {
         $instance = self::getInstance();
         $instance->registerMenuItem($className, $sortOrder);
     }
 
-    public static function setContainer(InvokerInterface $container)
+    /**
+     * @param Container $container
+     */
+    public static function setContainer(Container $container)
     {
         $instance = self::getInstance();
         $instance->registerContainer($container);
@@ -39,6 +58,9 @@ class Menu
         require __DIR__ . '/../view/menu.phtml';
     }
 
+    /**
+     * @return array
+     */
     private function getMenus()
     {
         usort($this->items, function ($a, $b) {
@@ -54,11 +76,18 @@ class Menu
         return $menus;
     }
 
+    /**
+     * @param $className
+     */
     private function renderItem($className)
     {
         $this->container->call($className);
     }
 
+    /**
+     * @param $className
+     * @param $sortOrder
+     */
     private function registerMenuItem($className, $sortOrder)
     {
         $this->items[] = [
@@ -67,7 +96,10 @@ class Menu
         ];
     }
 
-    private function registerContainer(InvokerInterface $container)
+    /**
+     * @param Container $container
+     */
+    private function registerContainer(Container $container)
     {
         $this->container = $container;
     }

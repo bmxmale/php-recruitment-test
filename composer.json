@@ -5,7 +5,7 @@
     "nikic/fast-route": "^1.0",
     "php-di/php-di": "^5.3",
     "symfony/var-dumper": "^4.0",
-    "vipnytt/sitemapparser": "^1.0"
+    "bmxmale/sitemap-importer-devtest": "1.0.0"
   },
   "autoload": {
     "psr-4": {
@@ -19,5 +19,18 @@
     "files": [
       "src/components.php"
     ]
-  }
+  },
+  "config": {
+    "use-include-path": true,
+    "preferred-install": {
+      "bmxmale/*": "source",
+      "*": "dist"
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/bmxmale/sitemap-importer-devtest"
+    }
+  ]
 }

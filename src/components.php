@@ -52,17 +52,3 @@ Menu::register(LoginMenu::class, 200);
 Menu::register(RegisterMenu::class, 250);
 
 Migrations::registerComponentMigration('Snowdog\\DevTest', 5);
-
-// TODO: Move to new package
-
-use Snowdog\DevTest\Command\SitemapCommand;
-use Snowdog\DevTest\Controller\SitemapAction;
-use Snowdog\DevTest\Controller\ImportSitemapAction;
-use Snowdog\DevTest\Menu\SitemapMenu;
-
-Menu::register(SitemapMenu::class, 20);
-
-RouteRepository::registerRoute('GET', '/sitemap', SitemapAction::class, 'execute');
-RouteRepository::registerRoute('POST', '/sitemap', ImportSitemapAction::class, 'execute');
-
-CommandRepository::registerCommand('import:sitemap [userLogin] [sitemapUrl]', SitemapCommand::class);

@@ -24,8 +24,6 @@ use Snowdog\DevTest\Menu\RegisterMenu;
 use Snowdog\DevTest\Menu\VarnishesMenu;
 use Snowdog\DevTest\Menu\WebsitesMenu;
 
-
-
 RouteRepository::registerRoute('GET', '/', IndexAction::class, 'execute');
 RouteRepository::registerRoute('GET', '/login', LoginFormAction::class, 'execute');
 RouteRepository::registerRoute('POST', '/login', LoginAction::class, 'execute');
@@ -43,8 +41,6 @@ RouteRepository::registerRoute('POST', '/varnishWebsite', CreateVarnishLinkActio
 CommandRepository::registerCommand('migrate_db', MigrateCommand::class);
 CommandRepository::registerCommand('warm [id]', WarmCommand::class);
 CommandRepository::registerCommand('warm_varnish [id]', WarmVarnishCommand::class);
-
-//php console.php  import:sitemap test https://www.sitemaps.org/sitemap.xml
 
 Menu::register(WebsitesMenu::class, 10);
 Menu::register(VarnishesMenu::class, 20);

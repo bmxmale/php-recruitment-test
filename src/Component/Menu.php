@@ -2,7 +2,7 @@
 
 namespace Snowdog\DevTest\Component;
 
-use DI\Container;
+use Invoker\InvokerInterface;
 
 /**
  * Class Menu
@@ -22,7 +22,8 @@ class Menu
      * @var array
      */
     private $items = [];
-    /** @var Container */
+
+    /** @var InvokerInterface */
     private $container;
 
     /** @return Menu */
@@ -45,9 +46,9 @@ class Menu
     }
 
     /**
-     * @param Container $container
+     * @param InvokerInterface $container
      */
-    public static function setContainer(Container $container)
+    public static function setContainer(InvokerInterface $container)
     {
         $instance = self::getInstance();
         $instance->registerContainer($container);
@@ -97,9 +98,9 @@ class Menu
     }
 
     /**
-     * @param Container $container
+     * @param InvokerInterface $container
      */
-    private function registerContainer(Container $container)
+    private function registerContainer(InvokerInterface $container)
     {
         $this->container = $container;
     }

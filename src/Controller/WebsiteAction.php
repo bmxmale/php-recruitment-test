@@ -50,14 +50,11 @@ class WebsiteAction extends Base
     {
         parent::execute();
 
-        if ($this->isLogged()) {
-            $user = $this->userManager->getByLogin($_SESSION['login']);
+        $user = $this->userManager->getByLogin($_SESSION['login']);
+        $website = $this->websiteManager->getById($id);
 
-            $website = $this->websiteManager->getById($id);
-
-            if ($website->getUserId() == $user->getUserId()) {
-                $this->website = $website;
-            }
+        if ($website->getUserId() == $user->getUserId()) {
+            $this->website = $website;
         }
 
         require __DIR__ . '/../view/website.phtml';

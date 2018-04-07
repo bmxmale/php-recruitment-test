@@ -6,9 +6,18 @@ use Snowdog\DevTest\Model\PageManager;
 use Snowdog\DevTest\Model\UserManager;
 use Snowdog\DevTest\Model\WebsiteManager;
 
-class CreatePageAction
+/**
+ * Class CreatePageAction
+ * @package Snowdog\DevTest\Controller
+ */
+class CreatePageAction extends Base
 {
-
+    /**
+     * CreatePageAction constructor.
+     * @param UserManager $userManager
+     * @param WebsiteManager $websiteManager
+     * @param PageManager $pageManager
+     */
     public function __construct(UserManager $userManager, WebsiteManager $websiteManager, PageManager $pageManager)
     {
         $this->websiteManager = $websiteManager;
@@ -18,6 +27,8 @@ class CreatePageAction
 
     public function execute()
     {
+        parent::execute();
+
         $url = $_POST['url'];
         $websiteId = $_POST['website_id'];
 

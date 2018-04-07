@@ -11,7 +11,7 @@ use Snowdog\DevTest\Model\WebsiteManager;
  * Class VarnishesAction
  * @package Snowdog\DevTest\Controller
  */
-class VarnishesAction
+class VarnishesAction extends Base
 {
     /**
      * @var UserManager
@@ -84,6 +84,8 @@ class VarnishesAction
 
     public function execute()
     {
+        parent::execute();
+
         include __DIR__ . '/../view/varnish.phtml';
     }
 

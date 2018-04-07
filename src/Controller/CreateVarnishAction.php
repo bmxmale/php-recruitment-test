@@ -9,7 +9,7 @@ use Snowdog\DevTest\Model\VarnishManager;
  * Class CreateVarnishAction
  * @package Snowdog\DevTest\Controller
  */
-class CreateVarnishAction
+class CreateVarnishAction extends Base
 {
     /**
      * @var VarnishManager
@@ -29,6 +29,8 @@ class CreateVarnishAction
 
     public function execute()
     {
+        parent::execute();
+
         if (!isset($_SESSION['login'])) {
             $this->redirectPage('User not logged');
         }

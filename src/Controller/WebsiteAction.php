@@ -7,9 +7,12 @@ use Snowdog\DevTest\Model\UserManager;
 use Snowdog\DevTest\Model\Website;
 use Snowdog\DevTest\Model\WebsiteManager;
 
-class WebsiteAction
+/**
+ * Class WebsiteAction
+ * @package Snowdog\DevTest\Controller
+ */
+class WebsiteAction extends Base
 {
-
     /**
      * @var WebsiteManager
      */
@@ -27,6 +30,12 @@ class WebsiteAction
      */
     private $website;
 
+    /**
+     * WebsiteAction constructor.
+     * @param UserManager $userManager
+     * @param WebsiteManager $websiteManager
+     * @param PageManager $pageManager
+     */
     public function __construct(UserManager $userManager, WebsiteManager $websiteManager, PageManager $pageManager)
     {
         $this->websiteManager = $websiteManager;
@@ -34,9 +43,14 @@ class WebsiteAction
         $this->userManager = $userManager;
     }
 
+    /**
+     * @param $id
+     */
     public function execute($id)
     {
-        if (isset($_SESSION['login'])) {
+        parent::execute();
+
+        if ($this->isLogged()) {
             $user = $this->userManager->getByLogin($_SESSION['login']);
 
             $website = $this->websiteManager->getById($id);
@@ -49,6 +63,9 @@ class WebsiteAction
         require __DIR__ . '/../view/website.phtml';
     }
 
+    /**
+     * @return array
+     */
     protected function getPages()
     {
         if($this->website) {

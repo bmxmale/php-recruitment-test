@@ -5,7 +5,7 @@ namespace Snowdog\DevTest\Controller;
 use Snowdog\DevTest\Model\UserManager;
 use Snowdog\DevTest\Model\WebsiteManager;
 
-class CreateWebsiteAction
+class CreateWebsiteAction extends Base
 {
     /**
      * @var UserManager
@@ -24,6 +24,8 @@ class CreateWebsiteAction
 
     public function execute()
     {
+        parent::execute();
+        
         $name = $_POST['name'];
         $hostname = $_POST['hostname'];
 

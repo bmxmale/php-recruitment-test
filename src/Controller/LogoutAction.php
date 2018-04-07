@@ -2,11 +2,17 @@
 
 namespace Snowdog\DevTest\Controller;
 
-class LogoutAction
+/**
+ * Class LogoutAction
+ * @package Snowdog\DevTest\Controller
+ */
+class LogoutAction extends Base
 {
+    public function execute()
+    {
+        parent::execute();
 
-    public function execute() {
-        if(isset($_SESSION['login'])) {
+        if (isset($_SESSION['login'])) {
             unset($_SESSION['login']);
             $_SESSION['flash'] = 'Logged out successfully';
         }

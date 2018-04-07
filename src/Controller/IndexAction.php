@@ -11,7 +11,7 @@ use Snowdog\DevTest\Model\WebsiteManager;
  * Class IndexAction
  * @package Snowdog\DevTest\Controller
  */
-class IndexAction
+class IndexAction extends Base
 {
 
     /**
@@ -77,6 +77,8 @@ class IndexAction
 
     public function execute()
     {
+        parent::execute();
+
         require __DIR__ . '/../view/index.phtml';
     }
 }

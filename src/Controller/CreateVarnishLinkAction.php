@@ -10,7 +10,7 @@ use Snowdog\DevTest\Model\WebsiteManager;
  * Class CreateVarnishLinkAction
  * @package Snowdog\DevTest\Controller
  */
-class CreateVarnishLinkAction
+class CreateVarnishLinkAction extends Base
 {
     /**
      * @var UserManager
@@ -45,6 +45,8 @@ class CreateVarnishLinkAction
 
     public function execute()
     {
+        parent::execute();
+
         header('Content-Type: application/json');
 
         $data = json_decode(file_get_contents('php://input'));

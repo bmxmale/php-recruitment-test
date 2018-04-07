@@ -2,11 +2,18 @@
 
 namespace Snowdog\DevTest\Controller;
 
-class LoginFormAction
+/**
+ * Class LoginFormAction
+ * @package Snowdog\DevTest\Controller
+ */
+class LoginFormAction extends Base
 {
-
     public function execute()
     {
+        if ($this->isLogged()) {
+            $this->show403();
+        }
+
         require __DIR__ . '/../view/login.phtml';
     }
 }

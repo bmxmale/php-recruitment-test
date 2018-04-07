@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6a765364b3f9d73c16ba9c79fb08e61",
+    "content-hash": "9307c82e9c1f5527ef4b2319f4af8f65",
     "packages": [
         {
             "name": "bmxmale/sitemap-importer-devtest",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bmxmale/sitemap-importer-devtest.git",
-                "reference": "ec9031774589e4966a3707eada544b73602f029e"
+                "reference": "7a47901b43169cff5b17c44bac4091076823f2c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bmxmale/sitemap-importer-devtest/zipball/ec9031774589e4966a3707eada544b73602f029e",
-                "reference": "ec9031774589e4966a3707eada544b73602f029e",
+                "url": "https://api.github.com/repos/bmxmale/sitemap-importer-devtest/zipball/7a47901b43169cff5b17c44bac4091076823f2c3",
+                "reference": "7a47901b43169cff5b17c44bac4091076823f2c3",
                 "shasum": ""
             },
             "require": {
@@ -37,10 +37,10 @@
             ],
             "description": "Sitemap importer to easily create new websites and pages",
             "support": {
-                "source": "https://github.com/bmxmale/sitemap-importer-devtest/tree/1.0.0",
+                "source": "https://github.com/bmxmale/sitemap-importer-devtest/tree/1.1.0",
                 "issues": "https://github.com/bmxmale/sitemap-importer-devtest/issues"
             },
-            "time": "2018-04-05T22:02:58+00:00"
+            "time": "2018-04-07T19:13:49+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -666,7 +666,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.0.7",
+            "version": "v4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -956,16 +956,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.0.7",
+            "version": "v4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "f9b257f2009c7f09166bcfd3d3d96455741ed371"
+                "reference": "e1b4d008100f4d203cc38b0d793ad6252d8d8af0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/f9b257f2009c7f09166bcfd3d3d96455741ed371",
-                "reference": "f9b257f2009c7f09166bcfd3d3d96455741ed371",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e1b4d008100f4d203cc38b0d793ad6252d8d8af0",
+                "reference": "e1b4d008100f4d203cc38b0d793ad6252d8d8af0",
                 "shasum": ""
             },
             "require": {
@@ -1021,7 +1021,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2018-04-03T05:24:00+00:00"
+            "time": "2018-04-04T05:10:37+00:00"
         },
         {
             "name": "vipnytt/sitemapparser",

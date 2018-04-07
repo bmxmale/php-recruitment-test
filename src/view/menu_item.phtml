@@ -1,1 +1,5 @@
-<li class="<?= $this->isActive()?'active':'' ?>"><a href="<?= $this->getHref() ?>"><?= $this->getLabel() ?></a></li>
+<?php if ($this->canShow()): ?>
+    <li class="<?= $this->isActive() ? 'active' : '' ?>">
+        <a href="<?= $this->getHref() ?>"><?= $this->getLabel() ?></a>
+    </li>
+<?php endif; ?>

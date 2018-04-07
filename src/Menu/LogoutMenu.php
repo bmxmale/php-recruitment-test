@@ -3,20 +3,20 @@
 namespace Snowdog\DevTest\Menu;
 
 /**
- * Class RegisterMenu
+ * Class LogoutMenu
  * @package Snowdog\DevTest\Menu
  */
-class RegisterMenu extends AbstractMenu
+class LogoutMenu extends AbstractMenu
 {
-    const NAME = 'Register';
-    const URL = '/register';
+    const NAME = 'Logout';
+    const URL = '/logout';
 
     /**
      * @return bool|mixed
      */
     public function isLoginRequired()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -41,12 +41,5 @@ class RegisterMenu extends AbstractMenu
     public function getLabel()
     {
         return self::NAME;
-    }
-
-    public function __invoke()
-    {
-        if (false === $this->isLogged()) {
-            parent::__invoke();
-        }
     }
 }

@@ -12,6 +12,14 @@ class VarnishesMenu extends AbstractMenu
     const URL = '/varnish';
 
     /**
+     * @return bool|mixed
+     */
+    public function isLoginRequired()
+    {
+        return true;
+    }
+
+    /**
      * @return bool
      */
     public function isActive()

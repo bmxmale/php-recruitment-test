@@ -20,6 +20,7 @@ use Snowdog\DevTest\Controller\RegisterFormAction;
 use Snowdog\DevTest\Controller\VarnishesAction;
 use Snowdog\DevTest\Controller\WebsiteAction;
 use Snowdog\DevTest\Menu\LoginMenu;
+use Snowdog\DevTest\Menu\LogoutMenu;
 use Snowdog\DevTest\Menu\RegisterMenu;
 use Snowdog\DevTest\Menu\VarnishesMenu;
 use Snowdog\DevTest\Menu\WebsitesMenu;
@@ -45,6 +46,7 @@ CommandRepository::registerCommand('warm_varnish [id]', WarmVarnishCommand::clas
 Menu::register(WebsitesMenu::class, 10);
 Menu::register(VarnishesMenu::class, 20);
 Menu::register(LoginMenu::class, 200);
+Menu::register(LogoutMenu::class, 200);
 Menu::register(RegisterMenu::class, 250);
 
 Migrations::registerComponentMigration('Snowdog\\DevTest', 5);
